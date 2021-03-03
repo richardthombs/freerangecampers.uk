@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: freerangecampers-website
-        image: docker.pkg.github.com/richardthombs/freerangecampers.com/freerangecampers-website:latest
+        image: docker.pkg.github.com/richardthombs/freerangecampers.uk/freerangecampers-website:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

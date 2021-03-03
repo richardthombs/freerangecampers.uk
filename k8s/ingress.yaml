@@ -12,11 +12,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - freerangecampers.com
-    - www.freerangecampers.com
+    - freerangecampers.uk
+    - www.freerangecampers.uk
     secretName: freerangecampers-tls
   rules:
-  - host: freerangecampers.com
+  - host: freerangecampers.uk
     http:
       paths:
       - path: /
