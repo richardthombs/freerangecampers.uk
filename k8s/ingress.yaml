@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: freerangecampers-ingress
+  labels:
+    app: freerangecampers
+    tier: ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - freerangecampers.com
+    - www.freerangecampers.com
+    secretName: freerangecampers-tls
+  rules:
+  - host: freerangecampers.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: freerangecampers-website
+            port:
+              number: 80

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: freerangecampers-website
+  labels:
+    app: freerangecampers
+    tier: website
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: freerangecampers
+    tier: website
