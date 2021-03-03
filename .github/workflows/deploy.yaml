@@ -9,12 +9,12 @@ jobs:
 
     - name: Build container
       run: |
-        docker build -t docker.pkg.github.com/richardthombs/freerangecampers.uk/freelancecampers-website:latest .
+        docker build -t docker.pkg.github.com/richardthombs/freerangecampers.uk/freerangecampers-website:latest .
 
     - name: Push to registry
       run: |
         docker login docker.pkg.github.com -u richardthombs -p "${{secrets.GITHUB_TOKEN}}"
-        docker push docker.pkg.github.com/richardthombs/freerangecampers.uk/freelancecampers-website:latest
+        docker push docker.pkg.github.com/richardthombs/freerangecampers.uk/freerangecampers-website:latest
 
   Deploy:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta'
@@ -33,9 +33,9 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freelancecampers delete deployment -l tier=website
-        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freelancecampers apply -f k8s
+        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freerangecampers delete deployment -l tier=website
+        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freerangecampers apply -f k8s
 
     - name: Verify deployment
       run: |
-        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freelancecampers -w --timeout=5m rollout status deployment freelancecampers-website
+        kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig -n freerangecampers -w --timeout=5m rollout status deployment freerangecampers-website
